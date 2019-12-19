@@ -1,0 +1,31 @@
+{
+    "name": "@myfolio/api",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "Royal",
+    "license": "MIT",
+    "dependencies": {
+        "bcrypt": "^3.0.7",
+        "body-parser": "^1.19.0",
+        "cookie-parser": "^1.4.4",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "knex": "^0.20.4",
+        "morgan": "^1.9.1",
+        "mysql2": "^2.0.2",
+        "uid-generator": "^2.0.0"
+    },
+    "scripts": {
+        "watch": "nodemon",
+        "db:dev:seed": "knex seed:run --env development",
+        "db:dev:latest": "knex migrate:latest --env development",
+        "db:production:latest": "knex migrate:latest --env production",
+        "db:dev:rollback": "knex migrate:rollback --env development",
+        "db:production:rollback": "knex migrate:rollback --env production"
+    },
+    "devDependencies": {
+        "faker": "^4.1.0"
+    }
+}

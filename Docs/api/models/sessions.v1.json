@@ -1,0 +1,20 @@
+{
+  "title": "Sessions",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "token": {
+      "type": "string"
+    },
+    "userID": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "token",
+    "userID"
+  ]
+}

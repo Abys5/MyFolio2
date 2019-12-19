@@ -1,0 +1,11 @@
+{
+  "name": "root",
+  "private": true,
+  "devDependencies": {
+    "lerna": "^3.18.3",
+    "nodemon": "^2.0.2"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
