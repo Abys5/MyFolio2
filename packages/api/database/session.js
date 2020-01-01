@@ -44,15 +44,15 @@ function createSession(userID, cb) {
         });
 }
 
-function getSessionByToken(token) {
+function getSessionByToken(token, cb) {
     db('sessions')
         .select('*')
         .where({ token: token })
         .then(ret => {
             if (ret[0]) {
-                return ret[0];
+                return cb(ret[0]);
             } else {
-                return null;
+                return cb(null);
             }
         });
 }

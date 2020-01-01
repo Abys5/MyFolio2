@@ -9,6 +9,15 @@ const session = require('../../database/session');
 const loginFormValidator = require('../../validator/loginFormValidator');
 const registerFormValidator = require('../../validator/registerFormValidator');
 
+router.post('/', (req, res) => {
+    console.log(req.user);
+    if (req.user) {
+        res.json(req.user);
+    } else {
+        res.send('BAD');
+    }
+});
+
 router.post('/login', (req, res) => {
     var { errors, isValid } = loginFormValidator(req.body);
     //console.log(Object.keys(errors).length);

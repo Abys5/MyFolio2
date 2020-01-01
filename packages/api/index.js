@@ -36,12 +36,25 @@ app.use((req, res, next) => {
                 }
 
                 if (payload) {
-                    var sessionEntry = session.getSessionByToken(payload.token);
-                    if (sessionEntry != null) {
-                        var userEntry = user.getUserByID(session.user_id);
-                        req.user = userEntry;
-                    }
-                    next();
+                    session.getSessionByToken(payload.token, sessionEntry => {
+                        if (sessionEntry != null) {
+                            user.getUserByID(
+                                sessionEntry.user_id,
+                                userEntry => {
+                                    if (userEntry != null) {
+                                        req.user = userEntry;
+                                        next();
+                                    } else {
+                                        req.user = null;
+                                        next();
+                                    }
+                                },
+                            );
+                        } else {
+                            req.user = null;
+                            next();
+                        }
+                    });
                 } else {
                     req.user = null;
                     next();
@@ -52,7 +65,7 @@ app.use((req, res, next) => {
         req.user = null;
         next();
     }
-    next();
+    //next();
 });
 
 app.use('/api', require('./routes'));

@@ -49,12 +49,12 @@ function createUser(first_name, last_name, username, email, password, cb) {
 }
 
 function getUserByID(id, cb) {
-    db('users')
-        .select('*')
+    db.select('*')
+        .from('users')
         .where({ id })
-        .then(ret => {
-            if (ret[0]) {
-                return cb(ret[0]);
+        .then(rows => {
+            if (rows[0]) {
+                return cb(rows[0]);
             } else {
                 return cb(null);
             }
