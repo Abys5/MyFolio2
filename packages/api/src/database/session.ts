@@ -1,9 +1,15 @@
 import db from '../database';
 
 import uidgenerator from 'uid-generator';
+import User from 'src/interfaces/User.interface';
 const uidgen = new uidgenerator(512, uidgenerator.BASE58);
 
-function getSessionByToken(token: string, cb: (sessionEntry: any) => any): void {
+//TODO: CREATE SESSION INTERFACE
+
+function getSessionByToken(
+    token: string,
+    cb: (sessionEntry: any) => any,
+): void {
     db('sessions')
         .select('*')
         .where({ token: token })
@@ -22,10 +28,10 @@ function createSession(userID: number, cb: (res: any) => any): void {
     db('users')
         .select()
         .where({ id: userID })
-        .then(ret => {
-            const user = ret[0];
+        .then((ret) => {
+            const user: User = ret[0];
             if (user) {
-                getSessionByToken(token, sessionEntry => {
+                getSessionByToken(token, (sessionEntry) => {
                     if (sessionEntry == null) {
                         db('sessions')
                             .insert({
@@ -34,7 +40,9 @@ function createSession(userID: number, cb: (res: any) => any): void {
                             })
                             .then((res: any) => {
                                 if (res[0] != null) {
-                                    console.log('[*] Session Created for @' + userID);
+                                    console.log(
+                                        '[*] Session Created for @' + userID,
+                                    );
                                     return cb(token);
                                 } else {
                                     return cb(null);

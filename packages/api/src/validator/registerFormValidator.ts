@@ -1,8 +1,24 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Validator = require('validator');
 
-export default function(data: { first_name: string; last_name: string; username: string; email: string; password: string }): { errors: {}; isValid: boolean } {
-    const errors = {
+interface Errors {
+    first_name: string;
+    last_name: string;
+    username: string;
+    email: string;
+    password: string;
+}
+
+export default function(data: {
+    first_name: string;
+    last_name: string;
+    username: string;
+    email: string;
+    password: string;
+}): { errors: Errors | null; isValid: boolean } {
+    let isValid = true;
+
+    const errors: Errors = {
         username: '',
         first_name: '',
         last_name: '',
@@ -10,7 +26,9 @@ export default function(data: { first_name: string; last_name: string; username:
         password: '',
     };
 
-    data.first_name = !Validator.isEmpty(data.first_name) ? data.first_name : '';
+    data.first_name = !Validator.isEmpty(data.first_name)
+        ? data.first_name
+        : '';
     data.last_name = !Validator.isEmpty(data.last_name) ? data.last_name : '';
     data.username = !Validator.isEmpty(data.username) ? data.username : '';
     data.email = !Validator.isEmpty(data.email) ? data.email : '';
@@ -48,8 +66,15 @@ export default function(data: { first_name: string; last_name: string; username:
         }
     }
 
+    for (const errorKey in errors) {
+        const error = errors[errorKey];
+        if (error != '') {
+            isValid = false;
+        }
+    }
+
     return {
         errors,
-        isValid: Object.keys(errors).length > 0,
+        isValid: isValid,
     };
 }

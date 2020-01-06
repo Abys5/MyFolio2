@@ -6,12 +6,19 @@ const config = configurations[environment];
 const db: knex = knex(config);
 
 db.raw('select 1+1 as result')
-    .catch(err => {
+    .catch((err) => {
         console.log(err);
         process.exit(1);
     })
     .then(() => {
-        console.log('Connected to ' + process.env.MYSQL_DB + ' - ' + process.env.MYSQL_USER + '@' + process.env.MYSQL_HOST);
+        console.log(
+            'Connected to ' +
+                process.env.MYSQL_DB +
+                ' - ' +
+                process.env.MYSQL_USER +
+                '@' +
+                process.env.MYSQL_HOST,
+        );
     });
 
 export default db;

@@ -1,8 +1,18 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Validator = require('validator');
 
-export default function(data: { email: string; password: string }): { errors: {}; isValid: boolean } {
-    const errors = {
+interface Errors {
+    email: string;
+    password: string;
+}
+
+export default function(data: {
+    email: string;
+    password: string;
+}): { errors: {}; isValid: boolean } {
+    let isValid = true;
+
+    const errors: Errors = {
         email: '',
         password: '',
     };
@@ -22,8 +32,15 @@ export default function(data: { email: string; password: string }): { errors: {}
         errors.password = 'Password field is required';
     }
 
+    for (const errorKey in errors) {
+        const error = errors[errorKey];
+        if (error != '') {
+            isValid = false;
+        }
+    }
+
     return {
         errors,
-        isValid: Object.keys(errors).length > 0,
+        isValid: isValid,
     };
 }

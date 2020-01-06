@@ -1,11 +1,12 @@
 import db from '../database';
 import bcrypt from 'bcrypt';
+import User from 'src/interfaces/User.interface';
 
-function getUserByID(id: number, cb: (userEntry: any) => any): void {
+function getUserByID(id: number, cb: (userEntry: User | null) => void): void {
     db.select('*')
         .from('users')
         .where({ id })
-        .then((rows: any[]) => {
+        .then((rows: User[]) => {
             if (rows[0]) {
                 return cb(rows[0]);
             } else {
@@ -14,11 +15,14 @@ function getUserByID(id: number, cb: (userEntry: any) => any): void {
         });
 }
 
-function getUserByEmail(email: string, cb: (userEntry: any) => any): void {
+function getUserByEmail(
+    email: string,
+    cb: (userEntry: User | null) => void,
+): void {
     db('users')
         .select('*')
         .where({ email })
-        .then((rows: any[]) => {
+        .then((rows: User[]) => {
             if (rows[0]) {
                 return cb(rows[0]);
             } else {
@@ -27,11 +31,14 @@ function getUserByEmail(email: string, cb: (userEntry: any) => any): void {
         });
 }
 
-function getUserByUsername(username: string, cb: (userEntry: any) => any): void {
+function getUserByUsername(
+    username: string,
+    cb: (userEntry: User | null) => void,
+): void {
     db('users')
         .select('*')
         .where({ username })
-        .then((rows: any[]) => {
+        .then((rows: User[]) => {
             if (rows[0]) {
                 return cb(rows[0]);
             } else {
@@ -40,10 +47,17 @@ function getUserByUsername(username: string, cb: (userEntry: any) => any): void 
         });
 }
 
-function createUser(first_name: string, last_name: string, username: string, email: string, password: string, cb: (success: boolean) => any): void {
-    getUserByEmail(email, userEntryEmail => {
+function createUser(
+    first_name: string,
+    last_name: string,
+    username: string,
+    email: string,
+    password: string,
+    cb: (success: boolean) => void,
+): void {
+    getUserByEmail(email, (userEntryEmail) => {
         if (userEntryEmail == null) {
-            getUserByUsername(username, userEntryUsername => {
+            getUserByUsername(username, (userEntryUsername) => {
                 if (userEntryUsername == null) {
                     bcrypt.hash(password, 10, (err: Error, hash: string) => {
                         if (err) {
@@ -60,7 +74,9 @@ function createUser(first_name: string, last_name: string, username: string, ema
                             })
                             .then((rows: any[]) => {
                                 if (rows[0] != null) {
-                                    console.log('[*] User Created for @' + username);
+                                    console.log(
+                                        '[*] User Created for @' + username,
+                                    );
                                     return cb(true);
                                 } else {
                                     return cb(false);

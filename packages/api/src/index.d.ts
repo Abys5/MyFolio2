@@ -1,4 +1,3 @@
-import User from './interfaces/User';
 import jwt from 'jsonwebtoken';
 
 declare namespace NodeJS {

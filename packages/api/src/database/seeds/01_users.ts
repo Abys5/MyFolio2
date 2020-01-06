@@ -2,7 +2,7 @@ import * as Knex from 'knex';
 import faker from 'faker';
 import bcrypt from 'bcrypt';
 
-function createUserObject(_id: number) {
+function createUserObject(_id: number): {} {
     const id = _id;
     const firstname = faker.name.firstName();
     const lastname = faker.name.lastName();
