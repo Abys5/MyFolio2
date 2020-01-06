@@ -21,7 +21,7 @@
         "validator": "^12.1.0"
     },
     "scripts": {
-        "build": "rimraf ./dist && tsc",
+        "build": "rimraf ./build && tsc",
         "watch": "nodemon",
         "start:dev": "ts-node ./src/index.ts",
         "db:make:migration": "knex --knexfile src/database/knexfile.ts -x ts migrate:make",
