@@ -53,6 +53,8 @@ export default (
                     }
                 },
             );
+        } else {
+            next();
         }
     } catch (e) {
         //req.user = undefined;

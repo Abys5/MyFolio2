@@ -5,7 +5,7 @@ export default ((): Express.Router => {
     const V1 = Express.Router();
     V1.use('/user', UserRouter());
 
-    V1.get('/status', (req, res) => {
+    V1.all('/status', (req, res) => {
         res.json({
             status: {
                 route: '/api/v1/status',

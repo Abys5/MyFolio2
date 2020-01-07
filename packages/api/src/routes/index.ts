@@ -6,7 +6,8 @@ export default ((): Express.Router => {
 
     API.use('/v1', V1);
 
-    API.get('/status', (req, res) => {
+    API.all('/status', (req, res) => {
+        //console.log('Boop');
         res.json({
             status: {
                 route: '/api/status',

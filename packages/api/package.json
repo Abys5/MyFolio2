@@ -15,7 +15,6 @@
         "jsonwebtoken": "^8.5.1",
         "knex": "^0.20.4",
         "morgan": "^1.9.1",
-        "mysql": "^2.17.1",
         "mysql2": "^2.1.0",
         "uid-generator": "^2.0.0",
         "validator": "^12.1.0"
