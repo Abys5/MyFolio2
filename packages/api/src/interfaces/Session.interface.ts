@@ -1,7 +1,7 @@
 interface Session {
     id: number;
     token: string;
-    user_id: number;
+    userID: number;
 
     created_at: Date;
     updated_at: Date;

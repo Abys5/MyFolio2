@@ -1,5 +1,7 @@
 require('ts-node/register');
-require('dotenv').config();
+require('dotenv').config({ path: '../../.env' });
+
+//console.log(process.env);
 
 const configs = {
     development: {

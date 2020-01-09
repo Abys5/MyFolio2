@@ -1,13 +1,20 @@
 import * as Knex from 'knex';
 
 export async function up(knex: Knex): Promise<any> {
-    return knex.schema.createTable('sessions', (table: Knex.TableBuilder) => {
+    return knex.schema.createTable('users', (table: Knex.TableBuilder) => {
         table.increments('id').primary();
 
+        table.string('title').notNullable();
+
         table
-            .string('token')
-            .notNullable()
-            .unique();
+            .string('content')
+            .defaultTo('')
+            .notNullable();
+
+        table
+            .integer('likes')
+            .defaultTo(0)
+            .notNullable();
 
         table
             .integer('userID')
@@ -23,5 +30,5 @@ export async function up(knex: Knex): Promise<any> {
 }
 
 export async function down(knex: Knex): Promise<any> {
-    return knex.schema.dropTable('sessions');
+    return knex.schema.dropTable('users');
 }

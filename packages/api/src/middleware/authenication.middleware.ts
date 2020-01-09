@@ -14,42 +14,51 @@ export default (
     next: Express.NextFunction,
 ): void => {
     try {
+        // Gets the Auth Token from the Headers or Cookies "x-auth-token"
         const token =
             req.headers['x-auth-token'] || req.cookies['x-auth-token'];
 
+        //Checks if Token is Present and then decodes it with secret
         if (token) {
-            //const payload: any = jwt.verify(token, process.env.SECRET, {});
             jwt.verify(
                 token,
                 process.env.SECRET as jwt.Secret,
                 {},
                 (err: jwt.VerifyErrors, payload: any) => {
-                    if (payload) {
-                        Session.getSessionByToken(
-                            payload.token,
-                            (sessionEntry) => {
-                                if (sessionEntry != null) {
-                                    User.getUserByID(
-                                        sessionEntry.user_id,
-                                        (userEntry) => {
-                                            if (userEntry != null) {
-                                                req.user = userEntry;
-                                                next();
-                                            } else {
-                                                //req.user = undefined;
-                                                next();
-                                            }
-                                        },
-                                    );
-                                } else {
-                                    //req.user = undefined;
-                                    next();
-                                }
-                            },
-                        );
-                    } else {
-                        //req.user = undefined;
+                    // Checks for JWT Errors, if not processes payload
+                    if (err) {
+                        console.error(err);
                         next();
+                    } else {
+                        // Checks if the Payload is present and then searchs DB for Session Entry
+                        if (payload) {
+                            Session.getSessionByToken(
+                                payload.token,
+                                (sessionEntry) => {
+                                    // Checks if the Session is Found
+                                    if (sessionEntry != null) {
+                                        // Search the DB for the User with the userID.
+                                        User.getUserByID(
+                                            sessionEntry.userID,
+                                            (userEntry) => {
+                                                // Checks if the User is Found
+                                                if (userEntry != null) {
+                                                    // Sets the Request with req.user
+                                                    req.user = userEntry;
+                                                    next();
+                                                } else {
+                                                    next();
+                                                }
+                                            },
+                                        );
+                                    } else {
+                                        next();
+                                    }
+                                },
+                            );
+                        } else {
+                            next();
+                        }
                     }
                 },
             );
@@ -57,7 +66,6 @@ export default (
             next();
         }
     } catch (e) {
-        //req.user = undefined;
         next();
     }
 };

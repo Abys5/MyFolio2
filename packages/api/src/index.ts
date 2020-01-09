@@ -3,6 +3,13 @@ import App from './App';
 
 /*
  *
+ * Interfaces
+ *
+ */
+import Middleware from './interfaces/Middleware.interface';
+
+/*
+ *
  *   Middleware
  *
  */
@@ -13,7 +20,7 @@ import BodyParser from 'body-parser';
 
 import AuthMiddleware from './middleware/authenication.middleware';
 
-const Middlewares = [
+const Middlewares: Middleware | any = [
     CORS(),
     Morgan('dev'),
     BodyParser.urlencoded({ extended: true }),

@@ -38,7 +38,7 @@ function createSession(
                     if (sessionEntry == null) {
                         db('sessions')
                             .insert({
-                                user_id: userID,
+                                userID: userID,
                                 token: token,
                             })
                             .then((res) => {

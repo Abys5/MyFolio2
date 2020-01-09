@@ -1,5 +1,5 @@
 import * as Express from 'express';
-import V1 from './v1/v1';
+import V1 from './v1';
 
 export default ((): Express.Router => {
     const API = Express.Router();
