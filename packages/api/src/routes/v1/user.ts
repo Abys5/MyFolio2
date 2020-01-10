@@ -10,7 +10,7 @@ import registerFormValidator from '../../validator/registerFormValidator';
 
 import { RequestWithUser } from 'src/interfaces/express.interface';
 
-export default (): Express.Router => {
+export default ((): Express.Router => {
     const UserRouter = Express.Router();
 
     UserRouter.post('/', (req: RequestWithUser, res: Express.Response) => {
@@ -93,5 +93,14 @@ export default (): Express.Router => {
         );
     });
 
+    UserRouter.all('/status', (req, res) => {
+        res.json({
+            status: {
+                route: '/api/v1/user/status',
+                msg: 'OK',
+            },
+        });
+    });
+
     return UserRouter;
-};
+})();

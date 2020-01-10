@@ -1,13 +1,13 @@
 import * as Knex from 'knex';
 
 export async function up(knex: Knex): Promise<any> {
-    return knex.schema.createTable('users', (table: Knex.TableBuilder) => {
+    return knex.schema.createTable('projects', (table: Knex.TableBuilder) => {
         table.increments('id').primary();
 
         table.string('title').notNullable();
 
         table
-            .string('content')
+            .string('content', 5000)
             .defaultTo('')
             .notNullable();
 
