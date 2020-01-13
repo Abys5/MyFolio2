@@ -1,6 +1,5 @@
 import * as Knex from 'knex';
 import faker from 'faker';
-import bcrypt from 'bcrypt';
 
 function createProjectObject(_id: number, _userID: number): {} {
     const id = _id;

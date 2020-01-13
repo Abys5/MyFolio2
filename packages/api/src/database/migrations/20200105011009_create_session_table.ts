@@ -18,7 +18,7 @@ export async function up(knex: Knex): Promise<any> {
             .notNullable()
             .onDelete('cascade');
 
-        table.timestamps();
+        table.timestamps(true, true);
     });
 }
 

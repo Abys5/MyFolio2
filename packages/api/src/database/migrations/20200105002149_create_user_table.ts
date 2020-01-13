@@ -22,7 +22,7 @@ export async function up(knex: Knex): Promise<any> {
 
         table.boolean('isAdmin').defaultTo(false);
 
-        table.timestamps();
+        table.timestamps(true, true);
     });
 }
 
