@@ -14,5 +14,8 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "scripts": {
+    "watch": "yarn workspace @myfolio/api watch"
+  }
 }

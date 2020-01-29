@@ -7,6 +7,8 @@ const environment = process.env.NODE_ENV || 'development';
 const config = configurations[environment];
 const db: knex = knex(config);
 
+const suffix = environment == 'development' ? '_dev' : '';
+
 db.raw('select 1+1 as result')
     .catch((err) => {
         console.log(err);
@@ -16,6 +18,7 @@ db.raw('select 1+1 as result')
         console.log(
             'Connected to ' +
                 process.env.MYSQL_DB +
+                suffix +
                 ' - ' +
                 process.env.MYSQL_USER +
                 '@' +
