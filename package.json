@@ -2,6 +2,7 @@
   "name": "root",
   "private": true,
   "devDependencies": {
+    "concurrently": "^5.1.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-node": "^4.0.0",
@@ -16,6 +17,8 @@
     "packages/*"
   ],
   "scripts": {
-    "watch": "yarn workspace @myfolio/api watch"
+    "watch": "concurrently -n Watch-API,Watch-WEB \"npm run watch-api\" \"npm run watch-web\"",
+    "watch-web": "yarn workspace @myfolio/web start",
+    "watch-api": "yarn workspace @myfolio/api watch"
   }
 }

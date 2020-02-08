@@ -13,7 +13,7 @@ class Server {
 
     constructor(middlewares: Middleware[]) {
         this.expressApp = Express();
-        this.port = Number(process.env.PORT) || 3000;
+        this.port = Number(process.env.PORT) || 4000;
 
         this.initMiddleware(middlewares);
         this.initRoutes();
