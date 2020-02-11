@@ -16,7 +16,7 @@ export default ((): Express.Router => {
     UserRouter.post('/', (req: RequestWithUser, res: Express.Response) => {
         //console.log(req.user);
         if (req.user) {
-            var user = req.user;
+            const user = req.user;
             delete user.password;
             delete user.id;
             delete user.created_at;
