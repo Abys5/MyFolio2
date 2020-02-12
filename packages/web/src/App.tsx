@@ -1,11 +1,12 @@
-import React from "react";
+import React from 'react';
+import Navbar from './components/Navbar';
 
 const App: React.FunctionComponent = () => {
-  return (
-    <>
-      <h1>Nav</h1>
-    </>
-  );
+    return (
+        <>
+            <Navbar></Navbar>
+        </>
+    );
 };
 
 export default App;
