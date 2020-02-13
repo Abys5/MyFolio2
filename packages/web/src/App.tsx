@@ -1,10 +1,10 @@
 import React from 'react';
-import Navbar from './components/Navbar';
+import HomePage from './Pages/HomePage';
 
 const App: React.FunctionComponent = () => {
     return (
         <>
-            <Navbar></Navbar>
+            <HomePage />
         </>
     );
 };
