@@ -55,12 +55,25 @@ const Menu = Styled.div<MenuProps>`
 
     text-align: center;
 
+    
+
     & ul {
         list-style: none;
         padding: 0;
 
+        & a {
+            text-decoration: none;
+            color: white; 
+        }
+
         & li {
-            padding-top: 20px;
+            transition: 0.3s ease-in-out;
+            padding: 20px 0;
+
+            &:hover {
+                background: white;
+                color: #FF8000; 
+            }
         }
 
     }
@@ -80,9 +93,15 @@ const RightHandMenu: React.FunctionComponent = () => {
             <Menu open={isOpened}>
                 <h3>Menu</h3>
                 <ul>
-                    <li>Home</li>
-                    <li>Login</li>
-                    <li>Register</li>
+                    <a href="/">
+                        <li>Home</li>
+                    </a>
+                    <a href="/login">
+                        <li>Login</li>
+                    </a>
+                    <a href="/register">
+                        <li>Register</li>
+                    </a>
                 </ul>
             </Menu>
         </Wrapper>

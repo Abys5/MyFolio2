@@ -1,0 +1,20 @@
+{
+  "type": "mysql",
+  "host": "localhost",
+  "port": 3306,
+  "username": "myfolio_user",
+  "password": "password",
+  "database": "myfolio_dev",
+  "synchronize": true,
+  "logging": false,
+  "entities": ["src/database/entity/**/*.ts"],
+  "migrations": ["src/database/migration/**/*.ts"],
+  "subscribers": ["src/database/subscriber/**/*.ts"],
+  "seeds": ["src/database/seeds/**/*.seed.ts"],
+  "factories": ["src/database/factories/**/*.factory.ts"],
+  "cli": {
+    "entitiesDir": "src/database/entity",
+    "migrationsDir": "src/database/migration",
+    "subscribersDir": "src/database/subscriber"
+  }
+}

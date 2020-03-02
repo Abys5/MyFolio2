@@ -9,8 +9,8 @@ const PageContainer = Styled.div`
     height: 100vh;
 
     background-image: url('${BackgroundImg}');
-    background-size: calc(100vw + 180px) calc(100vh + 130px);
-    background-position: -51px -43px;
+    background-size: 120% 120%;
+    background-position: calc(-4vw) calc(-6vh) ;
     background-repeat: no-repeat;
 
     overflow: hidden;
@@ -39,14 +39,14 @@ const MenuButton = Styled.button`
     background: none;
     border: none;
 
-    transition: 0.2s ease-in-out;
+    transition: 0.075s ease-in-out;
 
     &:hover {
-        transform: scale(1.2);
+        transform: scale(1.1);
     }
 
     &:active {
-        transform: scale(0.9);
+        transform: scale(0.95);
     }
 `;
 

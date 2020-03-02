@@ -2,13 +2,10 @@ import Express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-import User from '../../database/user';
-import Session from '../../database/session';
-
 import loginFormValidator from '../../validator/loginFormValidator';
 import registerFormValidator from '../../validator/registerFormValidator';
 
-import { RequestWithUser } from 'src/interfaces/express.interface';
+import { RequestWithUser } from '../../interfaces/express.interface';
 
 export default ((): Express.Router => {
     const UserRouter = Express.Router();
@@ -33,44 +30,7 @@ export default ((): Express.Router => {
         if (!isValid) {
             return res.json({ errors });
         }
-
-        User.getUserByEmail(req.body.email, (userEntry) => {
-            if (userEntry != null) {
-                bcrypt.compare(
-                    req.body.password,
-                    userEntry.password,
-                    (err, isSame) => {
-                        if (err) {
-                            throw err;
-                        }
-
-                        if (isSame) {
-                            Session.createSession(userEntry.id, (token) => {
-                                jwt.sign(
-                                    { token },
-                                    process.env.SECRET as any,
-                                    {},
-                                    (err: Error, jwtToken: string) => {
-                                        if (err) {
-                                            throw err;
-                                        }
-                                        return res.json({ token: jwtToken });
-                                    },
-                                );
-                            });
-                        } else {
-                            return res.json({
-                                errors: { form: 'Credentials are Incorrect' },
-                            });
-                        }
-                    },
-                );
-            } else {
-                return res.json({
-                    errors: { form: 'Credentials are Incorrect' },
-                });
-            }
-        });
+        //TODO: ADD USER LOGIN
     });
 
     UserRouter.post('/register', (req, res) => {
@@ -79,23 +39,7 @@ export default ((): Express.Router => {
         if (!isValid) {
             return res.json({ errors });
         }
-
-        User.createUser(
-            req.body.first_name,
-            req.body.last_name,
-            req.body.username,
-            req.body.email,
-            req.body.password,
-            (result) => {
-                if (result) {
-                    res.json({ msg: 'User Created!' });
-                } else {
-                    res.json({
-                        errors: { form: 'Error Occured when creating user' },
-                    });
-                }
-            },
-        );
+        //TODO: ADD USER CREATION
     });
 
     UserRouter.all('/status', (req, res) => {

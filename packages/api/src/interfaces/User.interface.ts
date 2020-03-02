@@ -1,3 +1,5 @@
+import { UserRole } from '../UserRoles';
+
 interface User {
     id: number;
     first_name: string;
@@ -8,7 +10,7 @@ interface User {
 
     image: string;
     description: string;
-    isAdmin: boolean;
+    roles: UserRole[];
 
     created_at: Date;
     updated_at: Date;

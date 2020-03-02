@@ -13,9 +13,11 @@
         "express": "^4.17.1",
         "is-empty": "^1.2.0",
         "jsonwebtoken": "^8.5.1",
-        "knex": "^0.20.4",
         "morgan": "^1.9.1",
         "mysql2": "^2.1.0",
+        "reflect-metadata": "^0.1.13",
+        "typeorm": "0.2.22",
+        "typeorm-seeding": "^1.2.0",
         "uid-generator": "^2.0.0",
         "validator": "^12.1.0"
     },
@@ -23,15 +25,11 @@
         "build": "rimraf ./build && tsc",
         "watch": "nodemon",
         "start:dev": "ts-node ./src/index.ts",
-        "db:make:migration": "knex --knexfile src/database/knexfile.ts -x ts migrate:make",
-        "db:make:seed": "knex --knexfile src/database/knexfile.ts -x ts seed:make",
-        "db:dev:seed": "knex --knexfile src/database/knexfile.ts seed:run --env development",
-        "db:dev:latest": "knex --knexfile src/database/knexfile.ts migrate:latest --env development",
-        "db:production:latest": "knex --knexfile src/database/knexfile.ts migrate:latest --env production",
-        "db:dev:rollback": "knex --knexfile src/database/knexfile.ts migrate:rollback --env development",
-        "db:production:rollback": "knex --knexfile src/database/knexfile.ts migrate:rollback --env production",
+        "db:seed": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed --config 'ormconfig.js'",
+        "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
         "test:lint": "eslint --ext .ts ./src",
-        "test:lint:fix": "npm run test:lint -- --fix"
+        "test:lint:fix": "npm run test:lint -- --fix",
+        "start": "ts-node src/index.ts"
     },
     "devDependencies": {
         "@types/bcrypt": "^3.0.0",
@@ -43,16 +41,16 @@
         "@types/is-empty": "^1.2.0",
         "@types/jsonwebtoken": "^8.3.5",
         "@types/morgan": "^1.7.37",
-        "@types/mysql2": "types/mysql2",
-        "@types/node": "^13.1.4",
+        "@types/node": "^8.0.29",
         "@types/uid-generator": "^2.0.2",
         "@types/validator": "^12.0.1",
         "@typescript-eslint/eslint-plugin": "^2.14.0",
         "@typescript-eslint/parser": "^2.14.0",
         "faker": "^4.1.0",
         "rimraf": "^3.0.0",
-        "ts-node": "^8.5.4",
-        "typescript": "^3.7.4"
+        "ts-node": "3.3.0",
+        "tsconfig-paths": "^3.9.0",
+        "typescript": "3.3.3333"
     },
     "nodemonConfig": {
         "ignore": [

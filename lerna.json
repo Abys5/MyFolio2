@@ -1,5 +1,6 @@
 {
   "packages": ["packages/*"],
+  "nohoist": ["**/typeorm-seeding/**", "**/typeorm-seeding"],
   "npmClient": "yarn",
   "useWorkspaces": true,
   "version": "independent"

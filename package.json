@@ -13,9 +13,15 @@
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1"
   },
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/typeorm-seeding/**",
+      "**/typeorm-seeding"
+    ]
+  },
   "scripts": {
     "watch": "concurrently -n Watch-API,Watch-WEB \"npm run watch-api\" \"npm run watch-web\"",
     "watch-web": "yarn workspace @myfolio/web start",

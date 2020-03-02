@@ -1,7 +1,10 @@
 import Express from 'express';
+import { createConnection, Connection } from 'typeorm';
 
 import API from './routes';
 import Middleware from './interfaces/Middleware.interface';
+
+import DotENV from 'dotenv';
 
 /*
  * @Server((Request, Responce, NextFunction)[])
@@ -10,13 +13,17 @@ import Middleware from './interfaces/Middleware.interface';
 class Server {
     public expressApp: Express.Express;
     public port: number;
+    public dbConnection: Connection | undefined;
 
     constructor(middlewares: Middleware[]) {
+        DotENV.config();
         this.expressApp = Express();
-        this.port = Number(process.env.PORT) || 4000;
+        this.port = Number(process.env.PORT) || 5000;
 
-        this.initMiddleware(middlewares);
-        this.initRoutes();
+        this.initDatabase().then(() => {
+            this.initMiddleware(middlewares);
+            this.initRoutes();
+        });
     }
 
     /*
@@ -35,6 +42,10 @@ class Server {
      */
     private initRoutes(): void {
         this.expressApp.use('/api', API);
+    }
+
+    private async initDatabase(): Promise<void> {
+        this.dbConnection = await createConnection();
     }
 
     /*

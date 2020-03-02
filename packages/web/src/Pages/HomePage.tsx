@@ -13,7 +13,7 @@ const PageContainer = Styled.div`
 
     background-image: url('${BackgroundImg}');
     background-size: calc(100vw + 180px) calc(100vh + 130px);
-    background-position: -51px -43px;
+    background-position: -62px -53px;
     background-repeat: no-repeat;
 
     overflow: hidden;
@@ -59,6 +59,8 @@ const TextBox = Styled.div`
         border-radius: 15px;
         margin-top: 20px;
         padding: 5px 20px;
+
+        
         
     }
 
